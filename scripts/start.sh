@@ -6,8 +6,14 @@ echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 # Copy private SSH key
 if [ ! -z "$SSH_KEY" ]; then
- echo $SSH_KEY > /root/.ssh/id_rsa
- chmod 600 /root/.ssh/id_rsa
+  if [ ! -z "$BASE64_ENCODED_SSH_KEY" ]; then
+    echo $SSH_KEY > /root/.ssh/id_rsa.base64
+    base64 -d /root/.ssh/id_rsa.base64 > /root/.ssh/id_rsa
+    chmod 600 /root/.ssh/id_rsa
+  else
+    echo $SSH_KEY > /root/.ssh/id_rsa
+    chmod 600 /root/.ssh/id_rsa
+  fi
 fi
 
 # Setup git variables
@@ -20,21 +26,21 @@ if [ ! -z "$GIT_NAME" ]; then
 fi
 
 # Dont pull code down if the .git folder exists
-if [ ! -d "/usr/src/app/.git" ];then
+if [ ! -d "/code/.git" ];then
   # Pull down code form git for our site!
   if [ ! -z "$GIT_REPO" ]; then
-    rm /usr/src/app/*
+    rm /code/*
     if [ ! -z "$GIT_BRANCH" ]; then
-      git clone  --recursive -b $GIT_BRANCH $GIT_REPO /usr/src/app/
+      git clone  --recursive -b $GIT_BRANCH $GIT_REPO /code/
     else
-      git clone --recursive $GIT_REPO /usr/src/app/
+      git clone --recursive $GIT_REPO /code/
     fi
-    chown -Rf www-data:www-data /usr/src/app/*
+    chown -Rf www-data:www-data /code/*
   else
     # if git repo not defined, pull from default repo:
-    git clone  --recursive -b production https://github.com/eduwass/containerstudio-wordpress.git /usr/src/app/
+    git clone  --recursive -b production https://github.com/eduwass/containerstudio-wordpress.git /code/
     # remove git files
-    rm -rf /usr/src/app/.git
+    rm -rf /code/.git
   fi
 fi
 
