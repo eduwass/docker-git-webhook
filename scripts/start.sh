@@ -47,5 +47,8 @@ fi
 # Run any commands passed by env
 eval $STARTUP_COMMANDS
 
+# Custom scripts
+source /usr/bin/run_custom_scripts_on_startup.sh
+
 # Start supervisord to start app and services
 /usr/bin/supervisord -n -c /etc/supervisord.conf

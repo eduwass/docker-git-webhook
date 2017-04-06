@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Custom scripts
+source /usr/bin/run_custom_scripts_before_push.sh
+
 # Run any commands before push
 eval $BEFORE_PUSH_COMMANDS
 
@@ -24,3 +27,6 @@ git push
 
 # Run any commands after push
 eval $AFTER_PUSH_COMMANDS
+
+# Custom scripts
+source /usr/bin/run_custom_scripts_after_push.sh

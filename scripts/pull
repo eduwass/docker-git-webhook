@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Custom scripts
+source /usr/bin/run_custom_scripts_before_pull.sh
+
 # Run any commands before pull
 eval $BEFORE_PULL_COMMANDS
 
@@ -18,3 +21,6 @@ git pull
 
 # Run any commands after pull
 eval $AFTER_PULL_COMMANDS
+
+# Custom scripts
+source /usr/bin/run_custom_scripts_after_pull.sh
