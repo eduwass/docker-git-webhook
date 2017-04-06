@@ -35,7 +35,7 @@ if [ ! -d "/code/.git" ];then
     else
       git clone --recursive $GIT_REPO /code/
     fi
-    chown -Rf www-data:www-data /code/*
+    chown -Rf root:root /code/*
   else
     # if git repo not defined, pull from default repo:
     git clone  --recursive -b production https://github.com/eduwass/containerstudio-wordpress.git /code/
