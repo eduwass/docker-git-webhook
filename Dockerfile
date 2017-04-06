@@ -2,15 +2,12 @@
 FROM alpine:3.5
 
 # Install Git
-RUN apt-get update && \
-apt-get install -y git
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh
 
 # Install Supervisor
-ENV PYTHON_VERSION=2.7.12-r0
-ENV PY_PIP_VERSION=8.1.2-r0
-ENV SUPERVISOR_VERSION=3.3.0
-RUN apk update && apk add -u python=$PYTHON_VERSION py-pip=$PY_PIP_VERSION
-RUN pip install supervisor==$SUPERVISOR_VERSION
+RUN apk add --no-cache \
+    supervisor
 
 # Copy supervisor config
 ADD conf/supervisord.conf /etc/supervisord.conf
