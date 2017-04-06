@@ -48,7 +48,7 @@ RUN chmod +x /usr/bin/hook-listener
 
 # Add any user custom scripts + set permissions
 ADD custom_scripts /custom_scripts
-RUN chmod +x /custom_scripts/*
+RUN chmod +x -R /custom_scripts
 
 # Expose Webhook port
 EXPOSE 8555
