@@ -1,14 +1,12 @@
 #!/bin/bash
 
 # Disable Strict Host checking for non interactive git clones
-
 mkdir -p -m 0700 /root/.ssh
 echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
-# Copy SSH key
+# Copy private SSH key
 if [ ! -z "$SSH_KEY" ]; then
- echo $SSH_KEY > /root/.ssh/id_rsa.base64
- base64 -d /root/.ssh/id_rsa.base64 > /root/.ssh/id_rsa
+ echo $SSH_KEY > /root/.ssh/id_rsa
  chmod 600 /root/.ssh/id_rsa
 fi
 
@@ -19,12 +17,6 @@ fi
 if [ ! -z "$GIT_NAME" ]; then
  git config --global user.name "$GIT_NAME"
  git config --global push.default simple
-fi
-
-# Install Extras
-if [ ! -z "$DEBS" ]; then
- apt-get update
- apt-get install -y $DEBS
 fi
 
 # Dont pull code down if the .git folder exists
@@ -45,10 +37,6 @@ if [ ! -d "/usr/src/app/.git" ];then
     rm -rf /usr/src/app/.git
   fi
 fi
-
-# Install npm dependencies
-cd /usr/src/app
-npm install
 
 # Run any commands passed by env
 eval $STARTUP_COMMANDS
