@@ -13,6 +13,14 @@ RUN apk add --no-cache \
 RUN apk add --no-cache \
     run-parts
 
+# Install Python and needed pip modules
+RUN apk add --update \
+    python \
+    python-dev \
+    py-pip \
+    build-base \
+  && pip install requests
+
 # Copy supervisor config
 ADD conf/supervisord.conf /etc/supervisord.conf
 
