@@ -1,0 +1,24 @@
+#!/bin/bash
+
+timestamp() {
+  date +"%D %T"
+}
+
+if [ -z "$GIT_EMAIL" ]; then
+ echo "You need to pass the \$GIT_EMAIL variable to the container for this to work"
+ exit
+fi
+
+if [ -z "$GIT_NAME" ]; then
+ echo "You need to pass the \$GIT_NAME variable to the container for this to work"
+ exit
+fi
+
+ts=$(timestamp)
+cd /usr/src/app
+git add *
+git commit -a -m "push from container $ts"
+git push
+
+# Run any commands after push
+eval $AFTER_PUSH_COMMANDS
