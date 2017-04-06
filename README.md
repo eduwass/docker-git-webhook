@@ -18,4 +18,13 @@ The following flags are a list of all the currently supported options that can b
  - **BEFORE_PULL_COMMANDS** : Add any commands that will be run before pull
  - **BEFORE_PUSH_COMMANDS** : Add any commands that will be run before push
  
+### Available Locations to add Custom Scripts
+
+Mount any .sh scripts you have to this location in the container so that they get executed on the corresponding step:
+
+  - **/custom_scripts/after_pull**
+  - **/custom_scripts/after_push**
+  - **/custom_scripts/before_pull**
+  - **/custom_scripts/before_push**
+  - **/custom_scripts/on_startup**
 
