@@ -32,6 +32,8 @@ if [ ! -d "/code/.git" ];then
     rm /code/*
     if [ ! -z "$GIT_BRANCH" ]; then
       git clone  --recursive -b $GIT_BRANCH $GIT_REPO /code/
+      cd /code && git checkout $GIT_BRANCH
+      git reset --hard origin/$GIT_BRANCH
     else
       git clone --recursive $GIT_REPO /code/
     fi
