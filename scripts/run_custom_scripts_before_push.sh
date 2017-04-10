@@ -1,2 +1,4 @@
 #!/bin/bash
-run-parts /custom_scripts/before_push
+for file in /custom_scripts/before_push/*; do
+    "$file"
+done

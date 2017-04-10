@@ -1,2 +1,4 @@
 #!/bin/bash
-run-parts /custom_scripts/on_startup
+for file in /custom_scripts/on_startup/*; do
+    "$file"
+done

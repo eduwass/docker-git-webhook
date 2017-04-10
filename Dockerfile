@@ -9,10 +9,6 @@ RUN apk update && apk upgrade && \
 RUN apk add --no-cache \
     supervisor
 
-# Install run-parts
-RUN apk add --no-cache \
-    run-parts
-
 # Install Python and needed pip modules
 RUN apk add --update \
     python \

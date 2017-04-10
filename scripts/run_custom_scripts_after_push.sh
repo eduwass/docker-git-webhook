@@ -1,2 +1,4 @@
 #!/bin/bash
-run-parts /custom_scripts/after_push
+for file in /custom_scripts/after_push/*; do
+    "$file"
+done

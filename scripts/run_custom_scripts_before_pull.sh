@@ -1,2 +1,4 @@
 #!/bin/bash
-run-parts /custom_scripts/before_pull
+for file in /custom_scripts/before_pull/*; do
+    "$file"
+done
