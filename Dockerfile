@@ -1,5 +1,5 @@
 # Use AlpineLinux as base image
-FROM alpine:3.5
+FROM alpine:3.14
 
 # Install Git
 RUN apk update && apk upgrade && \
@@ -11,9 +11,9 @@ RUN apk add --no-cache \
 
 # Install Python and needed pip modules
 RUN apk add --update \
-    python \
-    python-dev \
-    py-pip \
+    python3 \
+    python3-dev \
+    py3-pip \
     build-base \
   && pip install requests
 
